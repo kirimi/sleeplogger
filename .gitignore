@@ -44,3 +44,5 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+248-252_20s_binaural.wav
+248-252_20s_mono_3db_mod.wav
