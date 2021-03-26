@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:mwwm/mwwm.dart';
 import 'package:relation/relation.dart';
@@ -19,64 +20,80 @@ class PlayScreen extends CoreMwwmWidget {
 class _PlayScreenState extends WidgetState<PlayWm> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            Hero(
-              tag: Consts.heroPlay,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SlideAction(
-                  height: 50,
-                  text: AppString.slideToStop,
-                  innerColor: Colors.white30,
-                  outerColor: Colors.black54,
-                  elevation: 0,
-                  sliderButtonIconPadding: 6,
-                  onSubmit: wm.stop,
+    return WillPopScope(
+      onWillPop: () => wm.stop(),
+      child: Scaffold(
+        body: SafeArea(
+          child: Column(
+            children: [
+              Hero(
+                tag: Consts.heroPlay,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SlideAction(
+                    height: 50,
+                    text: AppString.slideToStop,
+                    innerColor: Colors.white30,
+                    outerColor: Colors.black54,
+                    elevation: 0,
+                    sliderButtonIconPadding: 6,
+                    onSubmit: wm.stop,
+                  ),
                 ),
               ),
-            ),
-            Expanded(
-              child: Stack(
-                children: [
-                  Column(
-                    children: [
-                      Expanded(
-                        child: StreamedStateBuilder<List<String>>(
+              Expanded(
+                child: Stack(
+                  children: [
+                    Column(
+                      children: [
+                        Expanded(
+                          child: StreamedStateBuilder<List<String>>(
                             streamedState: wm.log,
                             builder: (context, logs) {
                               return LoggerWidget(items: logs);
-                            }),
-                      ),
-                      Align(
-                        alignment: Alignment.bottomRight,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: StreamedStateBuilder<int>(
-                            streamedState: wm.registeredTaps,
-                            builder: (context, taps) {
-                              return Text(
-                                '${AppString.registeredTaps} $taps',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyText1
-                                    .copyWith(color: Colors.black54),
-                              );
                             },
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  GestureDetector(
-                    onTapDown: (_) => wm.tap(),
-                  )
-                ],
+                        Align(
+                          alignment: Alignment.bottomRight,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: StreamedStateBuilder<int>(
+                              streamedState: wm.registeredTaps,
+                              builder: (context, taps) {
+                                return Text(
+                                  '${AppString.registeredTaps} $taps',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyText1
+                                      .copyWith(color: Colors.black54),
+                                );
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    RawGestureDetector(
+                      behavior: HitTestBehavior.opaque,
+                      gestures: {
+                        MultiTapGestureRecognizer:
+                            GestureRecognizerFactoryWithHandlers<
+                                MultiTapGestureRecognizer>(
+                          () => MultiTapGestureRecognizer(),
+                          (instance) {
+                            instance.onTap = (_) => wm.tap();
+                            instance.onTapUp = (_, __) => wm.tap();
+                            instance.onTapDown = (_, __) => wm.tap();
+                          },
+                        )
+                      },
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

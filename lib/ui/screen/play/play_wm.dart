@@ -5,6 +5,7 @@ import 'package:mwwm/mwwm.dart';
 import 'package:relation/relation.dart';
 import 'package:sleeplogger/model/log/changes.dart';
 import 'package:sleeplogger/model/sound/changes.dart';
+import 'package:sleeplogger/utils/debouncer.dart';
 
 class PlayWm extends WidgetModel {
   PlayWm(
@@ -25,7 +26,10 @@ class PlayWm extends WidgetModel {
 
   final StreamedState<List<String>> log = StreamedState([]);
 
+  /// Подписка на логи
   StreamSubscription _logSubscription;
+
+  final Debouncer _debouncer = Debouncer(milliseconds: 300);
 
   @override
   void onBind() {
@@ -43,7 +47,10 @@ class PlayWm extends WidgetModel {
 
   /// Регистрируем тап по экрану
   void _onTap(_) {
-    model.perform(AddLogEntry('Tap'));
+    _debouncer.run(() {
+      model.perform(AddLogEntry('Tap'));
+    });
+
     registeredTaps.accept(registeredTaps.value + 1);
   }
 
