@@ -3,6 +3,8 @@ import 'package:mwwm/mwwm.dart';
 import 'package:provider/provider.dart';
 import 'package:sleeplogger/model/log/log_repository/log_repository_base.dart';
 import 'package:sleeplogger/model/log/performer.dart';
+import 'package:sleeplogger/model/sound/performer.dart';
+import 'package:sleeplogger/model/sound/sound_manager/sound_manager.dart';
 import 'package:sleeplogger/ui/screen/play/play_screen.dart';
 import 'package:sleeplogger/ui/screen/play/play_wm.dart';
 
@@ -19,6 +21,12 @@ WidgetModel _wmBuilder(BuildContext context) {
     Model(
       [
         AddLogEntryPerformer(context.read<LogRepository>()),
+        PlayRandomSamplePerformer(
+          soundManager: context.read<SoundManager>(),
+        ),
+        StopAllSoundsPerformer(
+          soundManager: context.read<SoundManager>(),
+        ),
       ],
     ),
   );

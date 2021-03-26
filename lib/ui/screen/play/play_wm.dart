@@ -2,6 +2,7 @@ import 'package:flutter/material.dart' hide Action;
 import 'package:mwwm/mwwm.dart';
 import 'package:relation/relation.dart';
 import 'package:sleeplogger/model/log/changes.dart';
+import 'package:sleeplogger/model/sound/changes.dart';
 
 class PlayWm extends WidgetModel {
   PlayWm(
@@ -25,6 +26,7 @@ class PlayWm extends WidgetModel {
     super.onBind();
     subscribe(stop.stream, _onStop);
     subscribe(tap.stream, _onTap);
+    model.perform(PlayRandomSample());
   }
 
   /// Регистрируем тап по экрану
@@ -35,6 +37,7 @@ class PlayWm extends WidgetModel {
 
   /// Останавливает процедуру
   void _onStop(_) {
+    model.perform(StopAllSounds());
     navigator.pop();
   }
 }
