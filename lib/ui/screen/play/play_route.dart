@@ -27,6 +27,7 @@ WidgetModel _wmBuilder(BuildContext context) {
         StopAllSoundsPerformer(
           soundManager: context.read<SoundManager>(),
         ),
+        LogStreamPerformer(context.read<LogRepository>()),
       ],
     ),
   );

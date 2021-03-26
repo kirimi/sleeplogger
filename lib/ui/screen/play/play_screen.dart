@@ -4,6 +4,7 @@ import 'package:relation/relation.dart';
 import 'package:sleeplogger/ui/res/app_string.dart';
 import 'package:sleeplogger/ui/res/consts.dart';
 import 'package:sleeplogger/ui/screen/play/play_wm.dart';
+import 'package:sleeplogger/ui/screen/play/widget/logger_widget.dart';
 import 'package:slide_to_act/slide_to_act.dart';
 
 /// Домашняя страница
@@ -40,23 +41,34 @@ class _PlayScreenState extends WidgetState<PlayWm> {
             Expanded(
               child: Stack(
                 children: [
-                  Align(
-                    alignment: Alignment.bottomRight,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: StreamedStateBuilder<int>(
-                        streamedState: wm.registeredTaps,
-                        builder: (context, taps) {
-                          return Text(
-                            '${AppString.registeredTaps} $taps',
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyText1
-                                .copyWith(color: Colors.black54),
-                          );
-                        },
+                  Column(
+                    children: [
+                      Expanded(
+                        child: StreamedStateBuilder<List<String>>(
+                            streamedState: wm.log,
+                            builder: (context, logs) {
+                              return LoggerWidget(items: logs);
+                            }),
                       ),
-                    ),
+                      Align(
+                        alignment: Alignment.bottomRight,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: StreamedStateBuilder<int>(
+                            streamedState: wm.registeredTaps,
+                            builder: (context, taps) {
+                              return Text(
+                                '${AppString.registeredTaps} $taps',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1
+                                    .copyWith(color: Colors.black54),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                   GestureDetector(
                     onTapDown: (_) => wm.tap(),
