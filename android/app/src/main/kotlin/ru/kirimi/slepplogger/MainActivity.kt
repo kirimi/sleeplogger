@@ -1,4 +1,4 @@
-package ru.kirimi.sleeplogger.sleeplogger
+package ru.kirimi.slepplogger
 
 import io.flutter.embedding.android.FlutterActivity
 
