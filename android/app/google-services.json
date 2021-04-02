@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:900292778021:android:c544a1e5eb3a1b25ba87cc",
+        "mobilesdk_app_id": "1:900292778021:android:127997d93e8caca4ba87cc",
         "android_client_info": {
-          "package_name": "ru.kirimi.slepplogger"
+          "package_name": "ru.kirimi.sleeplogger"
         }
       },
       "oauth_client": [
