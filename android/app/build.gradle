@@ -35,7 +35,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "ru.kirimi.slepplogger"
+        applicationId "ru.kirimi.sleeplogger"
         minSdkVersion 16
         targetSdkVersion 30
         versionCode flutterVersionCode.toInteger()
