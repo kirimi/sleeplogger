@@ -58,6 +58,10 @@ class PlayWm extends WidgetModel {
   void _onStop(_) {
     _logSubscription?.cancel();
     model.perform(StopAllSounds());
+
+    // Сохраняем лог
+    model.perform(SaveLogs());
+
     navigator.pop();
   }
 }

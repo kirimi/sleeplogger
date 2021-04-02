@@ -10,3 +10,6 @@ class AddLogEntry extends FutureChange<void> {
 
 /// Подписаться на обновления логов
 class SubscribeLog extends StreamChange<List<LogEntry>> {}
+
+/// Сохранить лог
+class SaveLogs extends FutureChange<void> {}

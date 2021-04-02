@@ -1,3 +1,4 @@
+/// Запись лога событий
 class LogEntry {
   final String message;
   final int timestamp;

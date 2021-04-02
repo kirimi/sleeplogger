@@ -37,9 +37,12 @@ class SoundManager {
     _mainPlayer.setLoopMode(LoopMode.all);
     _mainPlayer.play();
 
-    _playSignal(
-      signalWindowFrom: signalWindowFrom,
-      signalWindowTo: signalWindowTo,
+    _signalTimer = Timer(
+      const Duration(seconds: 60),
+      () => _playSignal(
+        signalWindowFrom: signalWindowFrom,
+        signalWindowTo: signalWindowTo,
+      ),
     );
 
     logRepository.add('Play sample ${sound.name} (${sound.asset})');

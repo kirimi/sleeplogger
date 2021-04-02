@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// Лог для страницы play
 class LoggerWidget extends StatelessWidget {
   final List<String> items;
 
@@ -10,7 +11,15 @@ class LoggerWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ListView(
-        children: items.reversed.map((e) => Text(e)).toList(),
+        children: items.reversed
+            .map(
+              (item) => Text(item,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText1
+                      .copyWith(color: Colors.black54)),
+            )
+            .toList(),
       ),
     );
   }
