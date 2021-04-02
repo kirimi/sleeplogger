@@ -6,6 +6,7 @@ import 'package:relation/relation.dart';
 import 'package:sleeplogger/model/log/changes.dart';
 import 'package:sleeplogger/model/sound/changes.dart';
 import 'package:sleeplogger/utils/debouncer.dart';
+import 'package:wakelock/wakelock.dart';
 
 class PlayWm extends WidgetModel {
   PlayWm(
@@ -36,6 +37,10 @@ class PlayWm extends WidgetModel {
     super.onBind();
     subscribe(stop.stream, _onStop);
     subscribe(tap.stream, _onTap);
+
+    // не выключаем экран во время сессии
+    Wakelock.enable();
+
     model.perform(PlayRandomSample());
     _logSubscription = model.perform(SubscribeLog()).listen((event) {
       log.accept(event
@@ -61,6 +66,9 @@ class PlayWm extends WidgetModel {
 
     // Сохраняем лог
     model.perform(SaveLogs());
+
+    // позволяем погаснуть экрану
+    Wakelock.disable();
 
     navigator.pop();
   }
