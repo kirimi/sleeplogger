@@ -1,3 +1,3 @@
 class Consts {
-  static const String heroPlay = 'heroplay';
+  static const String heroPlay = 'heroPlay';
 }
