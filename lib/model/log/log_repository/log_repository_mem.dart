@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:sleeplogger/domain/event_type.dart';
 import 'package:sleeplogger/domain/log_entry.dart';
 import 'package:sleeplogger/model/log/log_repository/log_repository_base.dart';
 
@@ -15,9 +16,9 @@ class LogRepositoryMem implements LogRepository {
 
   /// Добавляет запись в конец лога
   @override
-  void add(String message) {
+  void add(EventType type, String message) {
     final now = DateTime.now().millisecondsSinceEpoch;
-    final entry = LogEntry(message, now);
+    final entry = LogEntry(type: type, message: message, timestamp: now);
     _logs.add(entry);
     _logStreamController.sink.add(_logs);
   }

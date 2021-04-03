@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart' hide Action;
 import 'package:mwwm/mwwm.dart';
 import 'package:relation/relation.dart';
+import 'package:sleeplogger/domain/event_type.dart';
 import 'package:sleeplogger/model/log/changes.dart';
 import 'package:sleeplogger/model/sound/changes.dart';
 import 'package:sleeplogger/utils/debouncer.dart';
@@ -53,7 +54,7 @@ class PlayWm extends WidgetModel {
   /// Регистрируем тап по экрану
   void _onTap(_) {
     _debouncer.run(() {
-      model.perform(AddLogEntry('Tap'));
+      model.perform(AddLogEntry(EventType.tap, 'Tap'));
     });
 
     registeredTaps.accept(registeredTaps.value + 1);

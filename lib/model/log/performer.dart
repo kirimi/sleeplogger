@@ -15,7 +15,7 @@ class AddLogEntryPerformer extends FuturePerformer<void, AddLogEntry> {
 
   @override
   Future<void> perform(AddLogEntry change) async {
-    repository.add(change.message);
+    repository.add(change.type, change.message);
   }
 }
 
