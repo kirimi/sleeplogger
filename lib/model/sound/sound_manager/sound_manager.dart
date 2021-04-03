@@ -46,7 +46,7 @@ class SoundManager {
       ),
     );
 
-    logRepository.add(EventType.start, 'Play ${sound.name} (${sound.asset})');
+    logRepository.add(EventType.start, 'Play ${sound.name}');
   }
 
   /// Проигрывает сигнальный звук
