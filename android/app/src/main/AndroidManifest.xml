@@ -2,7 +2,7 @@
     package="ru.kirimi.sleeplogger">
    <application
         android:label="sleeplogger"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
