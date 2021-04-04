@@ -60,7 +60,11 @@ class SettingsRepositorySharedPrefs implements SettingsRepository {
   }
 
   @override
-  set gender(Gender value) => _pref.setBool(_genderKey, value == Gender.male);
+  set gender(Gender value) {
+    if (value != null) {
+      _pref.setBool(_genderKey, value == Gender.male);
+    }
+  }
 
   /// Первый запуск
   @override
