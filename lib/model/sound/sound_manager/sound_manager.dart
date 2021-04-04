@@ -31,12 +31,13 @@ class SoundManager {
     // Инициализируем рандомайзер
     _rnd = Random(DateTime.now().millisecondsSinceEpoch);
 
-    _signalPlayer.setAsset(signal.asset);
-    await _signalPlayer.setVolume(0.5);
-
     _mainPlayer.setAsset(sound.asset);
     _mainPlayer.setLoopMode(LoopMode.all);
+    await _mainPlayer.setVolume(1);
     _mainPlayer.play();
+
+    _signalPlayer.setAsset(signal.asset);
+    await _signalPlayer.setVolume(0.5);
 
     _signalTimer = Timer(
       const Duration(seconds: 60),
@@ -79,10 +80,12 @@ class SoundManager {
   }
 
   /// Останавливает все звуки
-  void stop() {
+  Future<void> stop() async {
     _signalTimer?.cancel();
     _signalPlayer.stop();
 
+    // Устанавливаем громкость в 0, чтобы не было щелчка
+    await _mainPlayer.setVolume(0);
     _mainPlayer.stop();
 
     logRepository.add(EventType.stop, 'Stop');
