@@ -67,12 +67,21 @@ class RegistrationWm extends WidgetModel {
     final user = User(
       name: name.value,
       email: email.value,
-      age: int.tryParse(age.value) ?? -1,
+      age: _parseAge(age.value),
       gender: gender.value,
     );
     model.perform(SaveUser(user));
 
     _goNextPage();
+  }
+
+  /// Возвращает возраст int или -1, если не распарсить в int
+  int _parseAge(String ageString) {
+    int ageInt;
+    if (age.value != null) {
+      ageInt = int.tryParse(age.value);
+    }
+    return ageInt ?? -1;
   }
 
   /// Переход на следующую страницу если это первых запуск

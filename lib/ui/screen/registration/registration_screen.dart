@@ -4,7 +4,6 @@ import 'package:mwwm/mwwm.dart';
 import 'package:relation/relation.dart';
 import 'package:sleeplogger/domain/gender.dart';
 import 'package:sleeplogger/ui/res/app_string.dart';
-import 'package:sleeplogger/ui/res/consts.dart';
 import 'package:sleeplogger/ui/screen/registration/registration_wm.dart';
 
 class RegistrationScreen extends CoreMwwmWidget {
@@ -34,12 +33,9 @@ class _RegistrationScreenState extends WidgetState<RegistrationWm> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Hero(
-                          tag: Consts.heroPlay,
-                          child: Text(
-                            AppString.appTitle,
-                            style: Theme.of(context).textTheme.headline4,
-                          ),
+                        Text(
+                          AppString.appTitle,
+                          style: Theme.of(context).textTheme.headline4,
                         ),
                         SizedBox(height: 16),
                         TextField(
