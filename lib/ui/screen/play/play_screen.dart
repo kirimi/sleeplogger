@@ -33,6 +33,10 @@ class _PlayScreenState extends WidgetState<PlayWm> {
                   child: SlideAction(
                     height: 50,
                     text: AppString.slideToStop,
+                    textStyle: Theme.of(context)
+                        .textTheme
+                        .bodyText1
+                        .copyWith(color: Colors.white38),
                     innerColor: Colors.white30,
                     outerColor: Colors.black54,
                     elevation: 0,

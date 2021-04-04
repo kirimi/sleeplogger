@@ -1,7 +1,7 @@
 class AppString {
   static const String appTitle = 'Эксперимент';
-  static const String slideToStop = 'Slide to stop';
-  static const String registeredTaps = 'Registered taps:';
+  static const String slideToStop = 'Проведите чтобы закончить';
+  static const String registeredTaps = 'Зарегистрировано касаний:';
 
   static const String regNameHint = 'Введите ваше имя';
   static const String regNameHelper = 'Имя';
@@ -15,7 +15,7 @@ class AppString {
 
   static const String instrSubmit = 'Продолжить';
 
-  static const String instructions = """
+  static const String instructionsMarkdown = """
 1. Цель данного эксперимента – исследовать процесс засыпания под влиянием различных звуковых стимулов. Опыт рекомендуется проводить либо примерно в 16 часов, либо примерно в 23 часа.
 2. Наденьте (вставьте) стереонаушники.
 3. Займите положение, в котором Вы могли бы уснуть.

@@ -30,7 +30,7 @@ class _InstructionsScreenState extends WidgetState<InstructionsWm> {
             ),
           ),
           Expanded(
-            child: Markdown(data: AppString.instructions),
+            child: Markdown(data: AppString.instructionsMarkdown),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
