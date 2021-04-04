@@ -4,8 +4,8 @@ import 'package:mwwm/mwwm.dart';
 import 'package:sleeplogger/domain/event_type.dart';
 import 'package:sleeplogger/domain/log_entry.dart';
 import 'package:sleeplogger/model/log/changes.dart';
-import 'package:sleeplogger/model/log/log_repository/log_repository_base.dart';
-import 'package:sleeplogger/model/log/storage_repository/storage_repository_base.dart';
+import 'package:sleeplogger/model/log/log_repository/log_repository.dart';
+import 'package:sleeplogger/model/log/storage_repository/storage_repository.dart';
 import 'package:sleeplogger/model/user/user_repository/user_repository.dart';
 import 'package:sleeplogger/utils/round_double.dart';
 

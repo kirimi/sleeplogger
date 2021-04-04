@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:sleeplogger/domain/event_type.dart';
 import 'package:sleeplogger/domain/log_entry.dart';
-import 'package:sleeplogger/model/log/log_repository/log_repository_base.dart';
+import 'package:sleeplogger/model/log/log_repository/log_repository.dart';
 
 /// Репозиторий лога
 class LogRepositoryMem implements LogRepository {

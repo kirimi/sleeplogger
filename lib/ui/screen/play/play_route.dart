@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mwwm/mwwm.dart';
 import 'package:provider/provider.dart';
-import 'package:sleeplogger/model/log/log_repository/log_repository_base.dart';
+import 'package:sleeplogger/model/log/log_repository/log_repository.dart';
 import 'package:sleeplogger/model/log/performer.dart';
-import 'package:sleeplogger/model/log/storage_repository/storage_repository_base.dart';
+import 'package:sleeplogger/model/log/storage_repository/storage_repository.dart';
 import 'package:sleeplogger/model/sound/performer.dart';
 import 'package:sleeplogger/model/sound/sound_manager/sound_manager.dart';
 import 'package:sleeplogger/model/user/user_repository/user_repository.dart';

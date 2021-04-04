@@ -1,5 +1,5 @@
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:sleeplogger/model/log/storage_repository/storage_repository_base.dart';
+import 'package:sleeplogger/model/log/storage_repository/storage_repository.dart';
 
 /// Репозиторий для сохранения лога в хранилище
 ///

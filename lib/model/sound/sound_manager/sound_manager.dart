@@ -4,7 +4,7 @@ import 'dart:math';
 import 'package:just_audio/just_audio.dart';
 import 'package:sleeplogger/domain/event_type.dart';
 import 'package:sleeplogger/domain/sound.dart';
-import 'package:sleeplogger/model/log/log_repository/log_repository_base.dart';
+import 'package:sleeplogger/model/log/log_repository/log_repository.dart';
 import 'package:sleeplogger/model/sound/sound_manager/sounds.dart';
 
 /// Управление воспроизведением
