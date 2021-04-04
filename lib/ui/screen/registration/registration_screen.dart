@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mwwm/mwwm.dart';
 import 'package:relation/relation.dart';
+import 'package:sleeplogger/domain/gender.dart';
 import 'package:sleeplogger/ui/res/app_string.dart';
 import 'package:sleeplogger/ui/res/consts.dart';
 import 'package:sleeplogger/ui/screen/registration/registration_wm.dart';
@@ -68,7 +69,7 @@ class _RegistrationScreenState extends WidgetState<RegistrationWm> {
                           ),
                         ),
                         SizedBox(height: 16),
-                        StreamedStateBuilder<int>(
+                        StreamedStateBuilder<Gender>(
                           streamedState: wm.gender,
                           builder: (context, selectedGender) {
                             return Column(
@@ -79,7 +80,7 @@ class _RegistrationScreenState extends WidgetState<RegistrationWm> {
                                     FaIcon(FontAwesomeIcons.male,
                                         color: Colors.white54),
                                     Radio(
-                                      value: 1,
+                                      value: Gender.male,
                                       groupValue: selectedGender,
                                       onChanged: (val) {
                                         FocusScope.of(context).unfocus();
@@ -90,7 +91,7 @@ class _RegistrationScreenState extends WidgetState<RegistrationWm> {
                                     FaIcon(FontAwesomeIcons.female,
                                         color: Colors.white54),
                                     Radio(
-                                      value: 2,
+                                      value: Gender.female,
                                       groupValue: selectedGender,
                                       onChanged: (val) {
                                         FocusScope.of(context).unfocus();

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart' hide Action;
 import 'package:mwwm/mwwm.dart';
 import 'package:relation/relation.dart';
+import 'package:sleeplogger/domain/gender.dart';
 import 'package:sleeplogger/ui/screen/instructions/instructions_route.dart';
 
 class RegistrationWm extends WidgetModel {
@@ -13,8 +14,8 @@ class RegistrationWm extends WidgetModel {
   final NavigatorState navigator;
 
   /// Radiobutton пол
-  final StreamedState gender = StreamedState<int>(0);
-  final setGender = Action<int>();
+  final StreamedState gender = StreamedState<Gender>();
+  final setGender = Action<Gender>();
 
   /// Поля ввода формы
   final name = TextEditingAction();
