@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mwwm/mwwm.dart';
 import 'package:sleeplogger/ui/res/consts.dart';
 import 'package:sleeplogger/ui/screen/home/home_wm.dart';
+import 'package:sleeplogger/ui/screen/home/widget/custom_bottom_nav_bar.dart';
 
 /// Домашняя страница
 class HomeScreen extends CoreMwwmWidget {
@@ -16,6 +17,9 @@ class _HomeScreenState extends WidgetState<HomeWm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: CustomBottomNavBar(
+        index: 0,
+      ),
       body: Center(
         child: Hero(
           tag: Consts.heroPlay,

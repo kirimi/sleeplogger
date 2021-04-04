@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart' hide Action;
 import 'package:mwwm/mwwm.dart';
 import 'package:relation/relation.dart';
+import 'package:sleeplogger/model/app/changes.dart';
 import 'package:sleeplogger/ui/screen/home/home_route.dart';
 
 class InstructionsWm extends WidgetModel {
@@ -18,6 +19,18 @@ class InstructionsWm extends WidgetModel {
   @override
   void onBind() {
     super.onBind();
-    subscribe(submit.stream, (t) => navigator.pushNamed(HomeRoute.routeName));
+    subscribe(submit.stream, (t) => _goNextPage());
+  }
+
+  /// Переход на следующую страницу если это первых запуск
+  /// или возврат на предыдущую, если попали сюда с home
+  Future<void> _goNextPage() async {
+    final bool isFirstRun = await model.perform(GetFirstRun());
+
+    if (isFirstRun) {
+      navigator.pushReplacementNamed(HomeRoute.routeName);
+    } else {
+      navigator.pop();
+    }
   }
 }

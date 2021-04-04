@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mwwm/mwwm.dart';
+import 'package:sleeplogger/data/settings_repository/settings_repository.dart';
 import 'package:sleeplogger/domain/event_type.dart';
+import 'package:sleeplogger/domain/gender.dart';
 import 'package:sleeplogger/domain/log_entry.dart';
 import 'package:sleeplogger/model/log/changes.dart';
 import 'package:sleeplogger/model/log/log_repository/log_repository.dart';
 import 'package:sleeplogger/model/log/storage_repository/storage_repository.dart';
-import 'package:sleeplogger/model/user/user_repository/user_repository.dart';
 import 'package:sleeplogger/utils/round_double.dart';
 
 /// Добавляет запись в репозиторий
@@ -37,24 +38,43 @@ class LogStreamPerformer extends StreamPerformer<List<LogEntry>, SubscribeLog> {
 class SaveLogsPerformer extends FuturePerformer<void, SaveLogs> {
   final LogRepository logRepository;
   final StorageRepository storageRepository;
-  final UserRepository userRepository;
+  final SettingsRepository settingsRepository;
 
   SaveLogsPerformer({
     @required this.logRepository,
     @required this.storageRepository,
-    @required this.userRepository,
+    @required this.settingsRepository,
   })  : assert(logRepository != null),
         assert(storageRepository != null),
-        assert(userRepository != null);
+        assert(settingsRepository != null);
 
   @override
   Future<void> perform(SaveLogs change) async {
-    final userId = await userRepository.getId();
-    final userName = await userRepository.getName();
-    final userEmail = await userRepository.getEmail();
+    final userId = settingsRepository.userId;
+    final userName = settingsRepository.username;
+    final userEmail = settingsRepository.email;
+    final userAge = settingsRepository.age;
+    final userGender = settingsRepository.gender;
 
-    final StringBuffer data =
-        StringBuffer('$userName <$userEmail>, id: $userId\n\n');
+    final StringBuffer data = StringBuffer();
+
+    if (userId.isNotEmpty) {
+      data.writeln('UserId: $userId');
+    }
+    if (userName.isNotEmpty) {
+      data.writeln('Name: $userName');
+    }
+    if (userEmail.isNotEmpty) {
+      data.writeln('Email: $userEmail');
+    }
+    if (userAge != -1) {
+      data.writeln('Age: $userAge');
+    }
+    if (userGender != null) {
+      data.writeln('Gender: ${userGender == Gender.male ? 'Male' : 'Female'}');
+    }
+
+    data.writeln('');
 
     data.writeln(_prepareLog());
 

@@ -2,6 +2,9 @@ import 'package:flutter/material.dart' hide Action;
 import 'package:mwwm/mwwm.dart';
 import 'package:relation/relation.dart';
 import 'package:sleeplogger/domain/gender.dart';
+import 'package:sleeplogger/domain/user.dart';
+import 'package:sleeplogger/model/app/changes.dart';
+import 'package:sleeplogger/model/user/changes.dart';
 import 'package:sleeplogger/ui/screen/instructions/instructions_route.dart';
 
 class RegistrationWm extends WidgetModel {
@@ -29,6 +32,12 @@ class RegistrationWm extends WidgetModel {
   final submit = Action<void>();
 
   @override
+  void onLoad() {
+    super.onLoad();
+    _initTextFields();
+  }
+
+  @override
   void onBind() {
     super.onBind();
     subscribe(setGender.stream, _onSetGender);
@@ -36,15 +45,45 @@ class RegistrationWm extends WidgetModel {
     subscribe(submit.stream, _onSubmit);
   }
 
+  /// Загружает сохраненные данные в форму
+  Future<void> _initTextFields() async {
+    final user = await model.perform(GetUser());
+    name.controller.text = user.name;
+    email.controller.text = user.email;
+    if (user.age != -1) {
+      age.controller.text = user.age.toString();
+    }
+    gender.accept(user.gender);
+  }
+
   /// При выборе пола
   void _onSetGender(value) => gender.accept(value);
 
   /// Нажали пропустить
-  void _onSkip(_) => navigator.pushNamed(InstructionsRoute.routeName);
+  void _onSkip(_) => _goNextPage();
 
   /// нажали продолжить
-  void _onSubmit(_) {
-    // todo сохранить данные
-    navigator.pushNamed(InstructionsRoute.routeName);
+  Future<void> _onSubmit(_) async {
+    final user = User(
+      name: name.value,
+      email: email.value,
+      age: int.tryParse(age.value) ?? -1,
+      gender: gender.value,
+    );
+    model.perform(SaveUser(user));
+
+    _goNextPage();
+  }
+
+  /// Переход на следующую страницу если это первых запуск
+  /// или возврат на предыдущую, если попали сюда с home
+  Future<void> _goNextPage() async {
+    final bool isFirstRun = await model.perform(GetFirstRun());
+
+    if (isFirstRun) {
+      navigator.pushReplacementNamed(InstructionsRoute.routeName);
+    } else {
+      navigator.pop();
+    }
   }
 }
