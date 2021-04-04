@@ -11,7 +11,7 @@ class StorageRepositoryCloud implements StorageRepository {
   Future<void> save(String filename, String data) async {
     try {
       await _storage
-          .ref('logs/$filename.csv')
+          .ref('logs/$filename.log')
           .putString(data, format: PutStringFormat.raw);
     } on FirebaseException catch (e) {
       // e.g, e.code == 'canceled'
