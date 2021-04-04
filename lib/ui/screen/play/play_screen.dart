@@ -51,6 +51,26 @@ class _PlayScreenState extends WidgetState<PlayWm> {
                     Column(
                       children: [
                         Expanded(
+                          child: StreamedStateBuilder<String>(
+                              streamedState: wm.timer,
+                              builder: (context, timer) {
+                                return Center(
+                                  child: Text(
+                                    timer,
+                                    textAlign: TextAlign.center,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headline1
+                                        .copyWith(
+                                          color: Colors.black54,
+                                          fontSize: 100,
+                                        ),
+                                  ),
+                                );
+                              }),
+                        ),
+                        Expanded(
+                          flex: 3,
                           child: StreamedStateBuilder<List<String>>(
                             streamedState: wm.log,
                             builder: (context, logs) {
