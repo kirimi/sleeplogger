@@ -5,9 +5,9 @@ import 'package:sleeplogger/model/user/changes.dart';
 
 /// Сохранение данных пользователя
 class SaveUserPerformer extends FuturePerformer<void, SaveUser> {
-  final SettingsRepository settingsRepository;
-
   SaveUserPerformer(this.settingsRepository);
+
+  final SettingsRepository settingsRepository;
 
   @override
   Future<void> perform(SaveUser change) async {
@@ -20,9 +20,9 @@ class SaveUserPerformer extends FuturePerformer<void, SaveUser> {
 
 /// Получение данных пользователя
 class GetUserPerformer extends FuturePerformer<User, GetUser> {
-  final SettingsRepository settingsRepository;
-
   GetUserPerformer(this.settingsRepository);
+
+  final SettingsRepository settingsRepository;
 
   @override
   Future<User> perform(GetUser change) {

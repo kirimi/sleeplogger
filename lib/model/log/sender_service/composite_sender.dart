@@ -16,6 +16,6 @@ class CompositeSender implements SenderService {
   @override
   Future<bool> send(String path) async {
     _cloudSender.send(path);
-    return await _emailSender.send(path);
+    return _emailSender.send(path);
   }
 }

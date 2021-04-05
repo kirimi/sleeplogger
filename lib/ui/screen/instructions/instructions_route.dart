@@ -7,10 +7,10 @@ import 'package:sleeplogger/ui/screen/instructions/instructions_screen.dart';
 import 'package:sleeplogger/ui/screen/instructions/instructions_wm.dart';
 
 class InstructionsRoute extends MaterialPageRoute {
-  static const String routeName = 'InstructionsRoute';
-
   InstructionsRoute()
-      : super(builder: (context) => InstructionsScreen(_wmBuilder));
+      : super(builder: (context) => const InstructionsScreen(_wmBuilder));
+
+  static const String routeName = 'InstructionsRoute';
 }
 
 WidgetModel _wmBuilder(BuildContext context) {

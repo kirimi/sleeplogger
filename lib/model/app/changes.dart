@@ -2,9 +2,10 @@ import 'package:mwwm/mwwm.dart';
 
 /// Устанавливает флаг первого запуска
 class SetFirstRun extends FutureChange<void> {
-  final bool isFirstRun;
-
+  // ignore: avoid_positional_boolean_parameters
   SetFirstRun(this.isFirstRun);
+
+  final bool isFirstRun;
 }
 
 /// Получить флаг первого запуска

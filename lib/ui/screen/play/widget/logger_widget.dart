@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 /// Лог для страницы play
 class LoggerWidget extends StatelessWidget {
-  final List<String> items;
-
   const LoggerWidget({Key key, this.items}) : super(key: key);
+
+  final List<String> items;
 
   @override
   Widget build(BuildContext context) {

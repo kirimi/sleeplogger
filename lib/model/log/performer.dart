@@ -12,9 +12,9 @@ import 'package:sleeplogger/utils/round_double.dart';
 
 /// Добавляет запись в репозиторий
 class AddLogEntryPerformer extends FuturePerformer<void, AddLogEntry> {
-  final LogRepository repository;
-
   AddLogEntryPerformer(this.repository);
+
+  final LogRepository repository;
 
   @override
   Future<void> perform(AddLogEntry change) async {
@@ -24,9 +24,9 @@ class AddLogEntryPerformer extends FuturePerformer<void, AddLogEntry> {
 
 /// Подписка на обновления логов
 class LogStreamPerformer extends StreamPerformer<List<LogEntry>, SubscribeLog> {
-  final LogRepository repository;
-
   LogStreamPerformer(this.repository);
+
+  final LogRepository repository;
 
   @override
   Stream<List<LogEntry>> perform(SubscribeLog change) {
@@ -36,10 +36,6 @@ class LogStreamPerformer extends StreamPerformer<List<LogEntry>, SubscribeLog> {
 
 /// Сохранение логов и очистка
 class SaveLogsPerformer extends FuturePerformer<void, SaveLogs> {
-  final LogRepository logRepository;
-  final StorageRepository storageRepository;
-  final SettingsRepository settingsRepository;
-
   SaveLogsPerformer({
     @required this.logRepository,
     @required this.storageRepository,
@@ -47,6 +43,10 @@ class SaveLogsPerformer extends FuturePerformer<void, SaveLogs> {
   })  : assert(logRepository != null),
         assert(storageRepository != null),
         assert(settingsRepository != null);
+
+  final LogRepository logRepository;
+  final StorageRepository storageRepository;
+  final SettingsRepository settingsRepository;
 
   @override
   Future<void> perform(SaveLogs change) async {
@@ -79,7 +79,7 @@ class SaveLogsPerformer extends FuturePerformer<void, SaveLogs> {
     data.writeln(_prepareLog());
 
     final now = DateTime.now().toString();
-    final filename = '$now\_$userName\_$userId';
+    final filename = '$now-$userName-$userId';
 
     storageRepository.save(filename, data.toString());
 

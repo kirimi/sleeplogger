@@ -10,9 +10,9 @@ import 'package:sleeplogger/ui/screen/home/home_screen.dart';
 import 'package:sleeplogger/ui/screen/home/home_wm.dart';
 
 class HomeRoute extends MaterialPageRoute {
-  static const String routeName = 'HomeRoute';
+  HomeRoute() : super(builder: (context) => const HomeScreen(_wmBuilder));
 
-  HomeRoute() : super(builder: (context) => HomeScreen(_wmBuilder));
+  static const String routeName = 'HomeRoute';
 }
 
 WidgetModel _wmBuilder(BuildContext context) {

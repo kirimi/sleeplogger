@@ -37,34 +37,34 @@ class _RegistrationScreenState extends WidgetState<RegistrationWm> {
                           AppString.appTitle,
                           style: Theme.of(context).textTheme.headline4,
                         ),
-                        SizedBox(height: 16),
+                        const SizedBox(height: 16),
                         TextField(
                           controller: wm.name.controller,
                           keyboardType: TextInputType.name,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             hintText: AppString.regNameHint,
                             helperText: AppString.regNameHelper,
                           ),
                         ),
-                        SizedBox(height: 16),
+                        const SizedBox(height: 16),
                         TextField(
                           controller: wm.email.controller,
                           keyboardType: TextInputType.emailAddress,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             hintText: AppString.regEmailHint,
                             helperText: AppString.regEmailHelper,
                           ),
                         ),
-                        SizedBox(height: 16),
+                        const SizedBox(height: 16),
                         TextField(
                           controller: wm.age.controller,
                           keyboardType: TextInputType.number,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             hintText: AppString.regAgeHint,
                             helperText: AppString.regAgeHelper,
                           ),
                         ),
-                        SizedBox(height: 16),
+                        const SizedBox(height: 16),
                         StreamedStateBuilder<Gender>(
                           streamedState: wm.gender,
                           builder: (context, selectedGender) {
@@ -73,23 +73,23 @@ class _RegistrationScreenState extends WidgetState<RegistrationWm> {
                               children: [
                                 Row(
                                   children: [
-                                    FaIcon(FontAwesomeIcons.male,
+                                    const FaIcon(FontAwesomeIcons.male,
                                         color: Colors.white54),
                                     Radio(
                                       value: Gender.male,
                                       groupValue: selectedGender,
-                                      onChanged: (val) {
+                                      onChanged: (Gender val) {
                                         FocusScope.of(context).unfocus();
                                         wm.setGender(val);
                                       },
                                     ),
-                                    SizedBox(width: 16),
-                                    FaIcon(FontAwesomeIcons.female,
+                                    const SizedBox(width: 16),
+                                    const FaIcon(FontAwesomeIcons.female,
                                         color: Colors.white54),
                                     Radio(
                                       value: Gender.female,
                                       groupValue: selectedGender,
-                                      onChanged: (val) {
+                                      onChanged: (Gender val) {
                                         FocusScope.of(context).unfocus();
                                         wm.setGender(val);
                                       },
@@ -126,11 +126,11 @@ class _RegistrationScreenState extends WidgetState<RegistrationWm> {
                 children: [
                   ElevatedButton(
                     onPressed: wm.skip,
-                    child: Text(AppString.regSkip),
+                    child: const Text(AppString.regSkip),
                   ),
                   ElevatedButton(
                     onPressed: wm.submit,
-                    child: Text(AppString.regSubmit),
+                    child: const Text(AppString.regSubmit),
                   ),
                 ],
               ),

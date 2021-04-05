@@ -17,7 +17,7 @@ class RegistrationWm extends WidgetModel {
   final NavigatorState navigator;
 
   /// Radiobutton пол
-  final StreamedState gender = StreamedState<Gender>();
+  final StreamedState<Gender> gender = StreamedState<Gender>();
   final setGender = Action<Gender>();
 
   /// Поля ввода формы
@@ -57,7 +57,7 @@ class RegistrationWm extends WidgetModel {
   }
 
   /// При выборе пола
-  void _onSetGender(value) => gender.accept(value);
+  void _onSetGender(Gender value) => gender.accept(value);
 
   /// Нажали пропустить
   void _onSkip(_) => _goNextPage();

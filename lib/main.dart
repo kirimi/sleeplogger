@@ -26,7 +26,7 @@ Future<void> main() async {
 
   // Устанавливаем userId как id устройства
   if (settingsRepository.userId.isEmpty) {
-    String deviceId = await PlatformDeviceId.getDeviceId;
+    final deviceId = await PlatformDeviceId.getDeviceId;
     settingsRepository.userId = deviceId;
   }
 

@@ -8,13 +8,13 @@ import 'package:sleeplogger/ui/screen/registration/registration_route.dart';
 ///
 /// нужно передать index - текущий активный элемент меню
 class CustomBottomNavBar extends StatelessWidget {
-  final int index;
-
   const CustomBottomNavBar({
     Key key,
     @required this.index,
   })  : assert(index != null),
         super(key: key);
+
+  final int index;
 
   @override
   Widget build(BuildContext context) {

@@ -17,7 +17,7 @@ class _HomeScreenState extends WidgetState<HomeWm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: CustomBottomNavBar(
+      bottomNavigationBar: const CustomBottomNavBar(
         index: 0,
       ),
       body: Center(
@@ -26,13 +26,13 @@ class _HomeScreenState extends WidgetState<HomeWm> {
           child: Container(
             height: 150,
             width: 150,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               shape: BoxShape.circle,
               color: Colors.black54,
             ),
             child: GestureDetector(
               onTap: wm.start,
-              child: Icon(
+              child: const Icon(
                 Icons.play_arrow_rounded,
                 size: 120,
                 color: Colors.white30,

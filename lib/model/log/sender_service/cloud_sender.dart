@@ -10,17 +10,17 @@ class CloudSender implements SenderService {
 
   @override
   Future<bool> send(String path) async {
-    File file = File(path);
+    final file = File(path);
     final filename = basename(path);
 
-    _storage.setMaxUploadRetryTime(Duration(seconds: 10));
-    Reference firebaseStorageRef = _storage.ref().child('logs').child(filename);
-    UploadTask uploadTask = firebaseStorageRef.putFile(file);
+    _storage.setMaxUploadRetryTime(const Duration(seconds: 10));
+    final firebaseStorageRef = _storage.ref().child('logs').child(filename);
+    final uploadTask = firebaseStorageRef.putFile(file);
 
     try {
       await uploadTask;
       return true;
-    } on FirebaseException catch (e) {
+    } on FirebaseException catch (_) {
       return false;
     }
   }

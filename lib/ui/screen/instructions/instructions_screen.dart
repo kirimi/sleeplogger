@@ -18,21 +18,21 @@ class _InstructionsScreenState extends WidgetState<InstructionsWm> {
     return Scaffold(
       body: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 40,
           ),
           Text(
             AppString.appTitle,
             style: Theme.of(context).textTheme.headline4,
           ),
-          Expanded(
+          const Expanded(
             child: Markdown(data: AppString.instructionsMarkdown),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: ElevatedButton(
               onPressed: wm.submit,
-              child: Text(AppString.instrSubmit),
+              child: const Text(AppString.instrSubmit),
             ),
           )
         ],

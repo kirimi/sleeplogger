@@ -21,7 +21,10 @@ class _PlayScreenState extends WidgetState<PlayWm> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () => wm.stop(),
+      onWillPop: () {
+        wm.stop();
+        return Future.value(true);
+      },
       child: Scaffold(
         body: SafeArea(
           child: Column(
@@ -31,7 +34,6 @@ class _PlayScreenState extends WidgetState<PlayWm> {
                 child: Padding(
                   padding: const EdgeInsets.all(30.0),
                   child: SlideAction(
-                    height: 70,
                     text: AppString.slideToStop,
                     textStyle: Theme.of(context)
                         .textTheme
@@ -40,7 +42,6 @@ class _PlayScreenState extends WidgetState<PlayWm> {
                     innerColor: Colors.white30,
                     outerColor: Colors.black54,
                     elevation: 0,
-                    sliderButtonIconPadding: 16,
                     onSubmit: wm.stop,
                   ),
                 ),

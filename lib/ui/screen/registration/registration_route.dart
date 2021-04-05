@@ -8,10 +8,10 @@ import 'package:sleeplogger/ui/screen/registration/registration_screen.dart';
 import 'package:sleeplogger/ui/screen/registration/registration_wm.dart';
 
 class RegistrationRoute extends MaterialPageRoute {
-  static const String routeName = 'RegistrationRoute';
-
   RegistrationRoute()
-      : super(builder: (context) => RegistrationScreen(_wmBuilder));
+      : super(builder: (context) => const RegistrationScreen(_wmBuilder));
+
+  static const String routeName = 'RegistrationRoute';
 }
 
 WidgetModel _wmBuilder(BuildContext context) {

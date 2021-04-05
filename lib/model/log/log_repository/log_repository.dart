@@ -3,7 +3,7 @@ import 'package:sleeplogger/domain/log_entry.dart';
 
 /// Репозиторий лога
 abstract class LogRepository {
-  Stream get logStream;
+  Stream<List<LogEntry>> get logStream;
 
   /// Добавляет запись в конец лога
   void add(EventType type, String message);

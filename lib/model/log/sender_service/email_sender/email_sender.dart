@@ -18,18 +18,17 @@ class EmailSender implements SenderService {
     final smtpServer = yandex(emailSenderSmtpUsername, emailSenderSmtpPassword);
 
     final message = mailer.Message()
-      ..from = mailer.Address(emailSenderEmailFrom, 'Sleep Logger')
+      ..from = const mailer.Address(emailSenderEmailFrom, 'Sleep Logger')
       ..recipients.add(emailSenderRecipient)
       ..subject = filename
       ..text = data;
 
     try {
-      final sendReport = await mailer.send(message, smtpServer);
-      print('Message sent: ' + sendReport.toString());
+      await mailer.send(message, smtpServer);
       return true;
     } on mailer.MailerException catch (e) {
-      print('Message not sent.');
-      for (var p in e.problems) {
+      for (final p in e.problems) {
+        // ignore: avoid_print
         print('Problem: ${p.code}: ${p.msg}');
       }
       return false;

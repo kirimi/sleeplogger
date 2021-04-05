@@ -8,8 +8,8 @@ import 'package:sleeplogger/model/log/log_repository/log_repository.dart';
 class LogRepositoryMem implements LogRepository {
   final List<LogEntry> _logs = [];
 
-  final StreamController _logStreamController =
-      StreamController<List<LogEntry>>.broadcast();
+  final StreamController<List<LogEntry>> _logStreamController =
+      StreamController.broadcast();
 
   @override
   Stream<List<LogEntry>> get logStream => _logStreamController.stream;
@@ -17,7 +17,7 @@ class LogRepositoryMem implements LogRepository {
   /// Добавляет запись в конец лога
   @override
   void add(EventType type, String message) {
-    final now = DateTime.now().millisecondsSinceEpoch;
+    final int now = DateTime.now().millisecondsSinceEpoch;
     final entry = LogEntry(type: type, message: message, timestamp: now);
     _logs.add(entry);
     _logStreamController.sink.add(_logs);

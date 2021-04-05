@@ -6,7 +6,7 @@ class GetUser extends FutureChange<User> {}
 
 /// Сохранить данные пользователя
 class SaveUser extends FutureChange<void> {
-  final User user;
-
   SaveUser(this.user);
+
+  final User user;
 }

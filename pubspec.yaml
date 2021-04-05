@@ -44,6 +44,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  lint: ^1.5.3
 #  flutter_launcher_icons: ^0.7.5
 
 flutter:

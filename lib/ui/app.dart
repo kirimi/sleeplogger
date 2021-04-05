@@ -14,7 +14,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: AppString.appTitle,
       theme: ThemeData.dark().copyWith(
-        pageTransitionsTheme: PageTransitionsTheme(
+        pageTransitionsTheme: const PageTransitionsTheme(
           builders: {
             TargetPlatform.iOS: FadeUpwardsPageTransitionsBuilder(),
             TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),

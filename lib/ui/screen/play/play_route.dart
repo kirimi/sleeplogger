@@ -11,9 +11,9 @@ import 'package:sleeplogger/ui/screen/play/play_screen.dart';
 import 'package:sleeplogger/ui/screen/play/play_wm.dart';
 
 class PlayRoute extends MaterialPageRoute {
-  static const String routeName = 'PlayRoute';
+  PlayRoute() : super(builder: (context) => const PlayScreen(_wmBuilder));
 
-  PlayRoute() : super(builder: (context) => PlayScreen(_wmBuilder));
+  static const String routeName = 'PlayRoute';
 }
 
 WidgetModel _wmBuilder(BuildContext context) {

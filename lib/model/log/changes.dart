@@ -4,10 +4,10 @@ import 'package:sleeplogger/domain/log_entry.dart';
 
 /// Добавить запись в лог
 class AddLogEntry extends FutureChange<void> {
+  AddLogEntry(this.type, this.message);
+
   final EventType type;
   final String message;
-
-  AddLogEntry(this.type, this.message);
 }
 
 /// Подписаться на обновления логов

@@ -4,6 +4,7 @@ import 'package:mwwm/mwwm.dart';
 class DefaultErrorHandler extends ErrorHandler {
   @override
   void handleError(Object e) {
+    // ignore: avoid_print
     print('Error: $e');
   }
 }
