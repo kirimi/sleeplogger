@@ -65,10 +65,9 @@ class SoundManager {
     }
 
     await _signalPlayer.seek(Duration.zero);
-    _signalPlayer.play();
-
     logRepository.add(EventType.signal, 'Play signal');
 
+    _signalPlayer.play();
     _signalTimer?.cancel();
     _signalTimer = Timer(
       getRandomDuration(),
@@ -81,14 +80,14 @@ class SoundManager {
 
   /// Останавливает все звуки
   Future<void> stop() async {
+    logRepository.add(EventType.stop, 'Stop');
+
     _signalTimer?.cancel();
     _signalPlayer.stop();
 
     // Устанавливаем громкость в 0, чтобы не было щелчка
     await _mainPlayer.setVolume(0);
-    _mainPlayer.stop();
-
-    logRepository.add(EventType.stop, 'Stop');
+    await _mainPlayer.stop();
   }
 
   /// Уничтожает плееры

@@ -35,7 +35,7 @@ class PlayWm extends WidgetModel {
   final StreamedState<int> registeredTaps = StreamedState(0);
 
   /// Время сессии, 60 минут
-  static const int _sessionDurationSeconds = 60 * 60;
+  static const int _sessionDurationSeconds = 3599;
 
   /// Таймер сессии
   Timer _timer;
@@ -81,11 +81,11 @@ class PlayWm extends WidgetModel {
   }
 
   /// Останавливает процедуру
-  void _onStop(_) {
+  Future<void> _onStop(_) async {
     _timer?.cancel();
     _logSubscription?.cancel();
 
-    model.perform(StopAllSounds());
+    await model.perform(StopAllSounds());
 
     // Сохраняем лог
     model.perform(SaveLogs());
