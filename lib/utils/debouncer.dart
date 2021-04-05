@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
+
 /// Позволяет выполнять [action] не чаще чем [milliseconds]
 ///
 /// Остальные вызовы игнорируются
@@ -11,11 +13,10 @@ import 'dart:async';
 /// });
 /// ```
 class Debouncer {
-  Debouncer({this.milliseconds});
+  Debouncer({@required this.milliseconds}) : assert(milliseconds != null);
 
   final int milliseconds;
 
-  Function action;
   Timer _timer;
 
   void run(Function action) {
