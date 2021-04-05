@@ -29,9 +29,9 @@ class _PlayScreenState extends WidgetState<PlayWm> {
               Hero(
                 tag: Consts.heroPlay,
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(30.0),
                   child: SlideAction(
-                    height: 50,
+                    height: 70,
                     text: AppString.slideToStop,
                     textStyle: Theme.of(context)
                         .textTheme
@@ -40,7 +40,7 @@ class _PlayScreenState extends WidgetState<PlayWm> {
                     innerColor: Colors.white30,
                     outerColor: Colors.black54,
                     elevation: 0,
-                    sliderButtonIconPadding: 6,
+                    sliderButtonIconPadding: 16,
                     onSubmit: wm.stop,
                   ),
                 ),
