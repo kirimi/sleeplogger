@@ -34,8 +34,8 @@ class PlayWm extends WidgetModel {
   /// Счетчик зарегистрированных тапов
   final StreamedState<int> registeredTaps = StreamedState(0);
 
-  /// Время сессии, 45 минут
-  static const int _sessionDurationSeconds = 45 * 60;
+  /// Время сессии, 60 минут
+  static const int _sessionDurationSeconds = 60 * 60;
 
   /// Таймер сессии
   Timer _timer;
