@@ -2,6 +2,7 @@ import 'package:flutter/material.dart' hide Action;
 import 'package:mwwm/mwwm.dart';
 import 'package:relation/relation.dart';
 import 'package:sleeplogger/model/app/changes.dart';
+import 'package:sleeplogger/model/log/changes.dart';
 import 'package:sleeplogger/ui/screen/play/play_route.dart';
 
 class HomeWm extends WidgetModel {
@@ -21,6 +22,9 @@ class HomeWm extends WidgetModel {
     // Следующие запуски будут начинаться с HomeScreen.
     // см. app.dart
     model.perform(SetFirstRun(false));
+
+    // Отправляем старые логи
+    model.perform(SendLogs());
   }
 
   @override
@@ -29,7 +33,10 @@ class HomeWm extends WidgetModel {
     subscribe(start.stream, _onStart);
   }
 
-  void _onStart(_) {
-    navigator.pushNamed(PlayRoute.routeName);
+  Future<void> _onStart(_) async {
+    // по возвращении пробуем отправить логи
+    navigator.pushNamed(PlayRoute.routeName).then(
+          (value) => model.perform(SendLogs()),
+        );
   }
 }

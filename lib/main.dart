@@ -10,8 +10,10 @@ import 'package:sleeplogger/data/settings_repository/settings_repository.dart';
 import 'package:sleeplogger/data/settings_repository/settings_repository_sharedpref.dart';
 import 'package:sleeplogger/model/log/log_repository/log_repository.dart';
 import 'package:sleeplogger/model/log/log_repository/log_repository_mem.dart';
+import 'package:sleeplogger/model/log/sender_service/cloud_sender.dart';
+import 'package:sleeplogger/model/log/sender_service/sender_service.dart';
 import 'package:sleeplogger/model/log/storage_repository/storage_repository.dart';
-import 'package:sleeplogger/model/log/storage_repository/storage_repository_cloud.dart';
+import 'package:sleeplogger/model/log/storage_repository/storage_repository_local.dart';
 import 'package:sleeplogger/model/sound/sound_manager/sound_manager.dart';
 import 'package:sleeplogger/ui/app.dart';
 import 'package:sleeplogger/ui/error/default_error_handler.dart';
@@ -50,7 +52,10 @@ Future<void> main() async {
             dispose: (context, soundManager) => soundManager.dispose(),
           ),
           Provider<StorageRepository>(
-            create: (_) => StorageRepositoryCloud(),
+            create: (_) => StorageRepositoryLocal(),
+          ),
+          Provider<SenderService>(
+            create: (_) => CloudSender(),
           ),
         ],
         child: App(),

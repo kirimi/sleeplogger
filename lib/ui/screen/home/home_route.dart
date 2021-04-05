@@ -3,6 +3,9 @@ import 'package:mwwm/mwwm.dart';
 import 'package:provider/provider.dart';
 import 'package:sleeplogger/data/settings_repository/settings_repository.dart';
 import 'package:sleeplogger/model/app/performer.dart';
+import 'package:sleeplogger/model/log/send_logs_performer.dart';
+import 'package:sleeplogger/model/log/sender_service/sender_service.dart';
+import 'package:sleeplogger/model/log/storage_repository/storage_repository.dart';
 import 'package:sleeplogger/ui/screen/home/home_screen.dart';
 import 'package:sleeplogger/ui/screen/home/home_wm.dart';
 
@@ -18,6 +21,10 @@ WidgetModel _wmBuilder(BuildContext context) {
     Navigator.of(context),
     Model([
       SetFirstRunPerformer(context.read<SettingsRepository>()),
+      SendLogsPerformer(
+        senderService: context.read<SenderService>(),
+        storageRepository: context.read<StorageRepository>(),
+      ),
     ]),
   );
 }

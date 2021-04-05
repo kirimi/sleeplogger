@@ -15,3 +15,6 @@ class SubscribeLog extends StreamChange<List<LogEntry>> {}
 
 /// Сохранить лог
 class SaveLogs extends FutureChange<void> {}
+
+/// Отправить логи на сервера
+class SendLogs extends FutureChange<void> {}
