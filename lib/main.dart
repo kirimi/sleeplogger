@@ -10,7 +10,7 @@ import 'package:sleeplogger/data/settings_repository/settings_repository.dart';
 import 'package:sleeplogger/data/settings_repository/settings_repository_sharedpref.dart';
 import 'package:sleeplogger/model/log/log_repository/log_repository.dart';
 import 'package:sleeplogger/model/log/log_repository/log_repository_mem.dart';
-import 'package:sleeplogger/model/log/sender_service/cloud_sender.dart';
+import 'package:sleeplogger/model/log/sender_service/composite_sender.dart';
 import 'package:sleeplogger/model/log/sender_service/sender_service.dart';
 import 'package:sleeplogger/model/log/storage_repository/storage_repository.dart';
 import 'package:sleeplogger/model/log/storage_repository/storage_repository_local.dart';
@@ -55,7 +55,9 @@ Future<void> main() async {
             create: (_) => StorageRepositoryLocal(),
           ),
           Provider<SenderService>(
-            create: (_) => CloudSender(),
+            create: (context) => CompositeSender(
+              context.read<StorageRepository>(),
+            ),
           ),
         ],
         child: App(),
