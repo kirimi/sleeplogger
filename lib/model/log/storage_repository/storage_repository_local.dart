@@ -33,6 +33,12 @@ class StorageRepositoryLocal implements StorageRepository {
     final files = <String>[];
 
     final completer = Completer<List<String>>();
+
+    if (!(await dir.exists())) {
+      completer.complete(files);
+      return completer.future;
+    }
+
     final lister = dir.list(recursive: false);
     lister.listen(
       (file) => files.add(file.path),

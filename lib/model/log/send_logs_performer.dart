@@ -18,8 +18,8 @@ class SendLogsPerformer extends FuturePerformer<void, SendLogs> {
     final files = await storageRepository.list();
     if (files.isNotEmpty) {
       for (final file in files) {
-        final isSent = await senderService.send(file);
-        if (isSent) {
+        final success = await senderService.send(file);
+        if (success) {
           await storageRepository.delete(file);
         }
       }

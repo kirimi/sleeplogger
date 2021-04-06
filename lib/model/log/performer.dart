@@ -81,7 +81,7 @@ class SaveLogsPerformer extends FuturePerformer<void, SaveLogs> {
     final now = DateTime.now().toString();
     final filename = '$now-$userName-$userId';
 
-    storageRepository.save(filename, data.toString());
+    await storageRepository.save(filename, data.toString());
 
     logRepository.clear();
   }

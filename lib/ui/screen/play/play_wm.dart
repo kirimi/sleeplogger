@@ -88,7 +88,7 @@ class PlayWm extends WidgetModel {
     await model.perform(StopAllSounds());
 
     // Сохраняем лог
-    model.perform(SaveLogs());
+    await model.perform(SaveLogs());
 
     // позволяем погаснуть экрану
     Wakelock.disable();

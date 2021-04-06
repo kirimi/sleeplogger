@@ -17,8 +17,9 @@ class _HomeScreenState extends WidgetState<HomeWm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: const CustomBottomNavBar(
+      bottomNavigationBar: CustomBottomNavBar(
         index: 0,
+        onTapItem: (int index) => wm.bottomNavTap(index),
       ),
       body: Center(
         child: Hero(
