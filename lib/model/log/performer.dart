@@ -112,11 +112,11 @@ class SaveLogsPerformer extends FuturePerformer<void, SaveLogs> {
         case EventType.start:
         case EventType.stop:
         case EventType.signal:
-          result.writeln('+${tsDelta}s ${logs[i].message}');
+          result.writeln('$tsDelta\t${logs[i].message}');
           break;
         case EventType.tap:
           if (i != 0 && logs[i - 1].type != EventType.tap) {
-            result.writeln('+${tsDelta}s ${logs[i].message}');
+            result.writeln('$tsDelta\t${logs[i].message}');
           }
           break;
       }
