@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart' hide Action;
+import 'package:flutter/services.dart';
 import 'package:mwwm/mwwm.dart';
 import 'package:relation/relation.dart';
 import 'package:sleeplogger/domain/event_type.dart';
@@ -52,6 +53,8 @@ class PlayWm extends WidgetModel {
     // не выключаем экран во время сессии
     Wakelock.enable();
 
+    _setEnabledSystemUI(false);
+
     _timer = Timer.periodic(const Duration(seconds: 1), _onTimer);
     _updateTimer(_sessionDurationSeconds);
 
@@ -93,6 +96,8 @@ class PlayWm extends WidgetModel {
     // позволяем погаснуть экрану
     Wakelock.disable();
 
+    _setEnabledSystemUI(true);
+
     navigator.pop();
   }
 
@@ -115,6 +120,16 @@ class PlayWm extends WidgetModel {
 
     final timerString = '$min:$sec';
     timer.accept(timerString);
+  }
+
+  /// Показывает или скрывает системные бары
+  void _setEnabledSystemUI(bool enabled) {
+    SystemChrome.setEnabledSystemUIOverlays([
+      if (enabled) ...[
+        SystemUiOverlay.bottom,
+        SystemUiOverlay.top,
+      ]
+    ]);
   }
 
   @override
