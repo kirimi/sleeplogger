@@ -23,7 +23,7 @@ class _PlayScreenState extends WidgetState<PlayWm> {
     return WillPopScope(
       onWillPop: () {
         wm.stop();
-        return Future.value(true);
+        return Future.value(false);
       },
       child: Scaffold(
         body: SafeArea(
