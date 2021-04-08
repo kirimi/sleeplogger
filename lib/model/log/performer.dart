@@ -89,35 +89,51 @@ class SaveLogsPerformer extends FuturePerformer<void, SaveLogs> {
   /// Делает временные отметки относительно начала лога
   /// Оставляет только первый тап, остальное удаляет.
   String _prepareLog() {
-    final logs = logRepository.all();
+    final List<LogEntry> logs = logRepository.all();
+    final List<LogEntry> cleanedLogs = [];
 
     if (logs.isEmpty) {
       return '';
     }
 
-    final startTs = logs[0].timestamp;
-
-    final result = StringBuffer();
-
-    final startDateTime = DateTime.fromMillisecondsSinceEpoch(startTs);
-    result.writeln('Start date: $startDateTime\n');
-
+    // Очищаем лог от лишних тапов. Оставляем только первый тап
     for (var i = 0; i < logs.length; i++) {
-      final tsDelta = roundDouble(
-          Duration(milliseconds: logs[i].timestamp - startTs).inMilliseconds /
-              1000,
-          1);
-
       switch (logs[i].type) {
         case EventType.start:
         case EventType.stop:
         case EventType.signal:
-          result.writeln('$tsDelta\t${logs[i].message}');
+          cleanedLogs.add(logs[i]);
           break;
         case EventType.tap:
           if (i != 0 && logs[i - 1].type != EventType.tap) {
-            result.writeln('$tsDelta\t${logs[i].message}');
+            cleanedLogs.add(logs[i]);
           }
+          break;
+      }
+    }
+
+    final result = StringBuffer();
+
+    final startTs = cleanedLogs[0].timestamp;
+    final startDateTime = DateTime.fromMillisecondsSinceEpoch(startTs);
+    result.writeln('Start date: $startDateTime\n');
+
+    for (var i = 0; i < cleanedLogs.length; i++) {
+      final tsDelta =
+          roundDouble((cleanedLogs[i].timestamp - startTs) / 1000, 1);
+
+      switch (cleanedLogs[i].type) {
+        case EventType.start:
+          result.write('\n$tsDelta\t${cleanedLogs[i].message}');
+          break;
+        case EventType.stop:
+          result.write('\n$tsDelta\t${cleanedLogs[i].message}');
+          break;
+        case EventType.signal:
+          result.write('\n$tsDelta\t${cleanedLogs[i].message}');
+          break;
+        case EventType.tap:
+          result.write('\t$tsDelta\t${cleanedLogs[i].message}');
           break;
       }
     }
