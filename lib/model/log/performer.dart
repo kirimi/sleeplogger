@@ -9,6 +9,7 @@ import 'package:sleeplogger/model/log/changes.dart';
 import 'package:sleeplogger/model/log/log_repository/log_repository.dart';
 import 'package:sleeplogger/model/log/storage_repository/storage_repository.dart';
 import 'package:sleeplogger/utils/round_double.dart';
+import 'package:translit/translit.dart';
 
 /// Добавляет запись в репозиторий
 class AddLogEntryPerformer extends FuturePerformer<void, AddLogEntry> {
@@ -79,9 +80,10 @@ class SaveLogsPerformer extends FuturePerformer<void, SaveLogs> {
     data.writeln(_prepareLog());
 
     final now = DateTime.now().toString();
-    final filename = '$now-$userName-$userId';
+    final filename = '$now-$userName-$userId'.replaceAll(' ', '_');
+    final translitFilename = Translit().toTranslit(source: filename);
 
-    await storageRepository.save(filename, data.toString());
+    await storageRepository.save(translitFilename, data.toString());
 
     logRepository.clear();
   }

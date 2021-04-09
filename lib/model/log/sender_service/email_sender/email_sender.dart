@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:mailer/mailer.dart' as mailer;
 import 'package:mailer/smtp_server.dart';
 import 'package:path/path.dart';
@@ -21,7 +23,14 @@ class EmailSender implements SenderService {
       ..from = const mailer.Address(emailSenderEmailFrom, 'Sleep Logger')
       ..recipients.add(emailSenderRecipient)
       ..subject = filename
-      ..text = data;
+      ..text = data
+      ..attachments = [
+        mailer.FileAttachment(
+          File(path),
+          fileName: filename,
+          contentType: 'text/csv',
+        )
+      ];
 
     try {
       await mailer.send(message, smtpServer);
