@@ -22,15 +22,21 @@ class HomeWm extends WidgetModel {
   /// Нижнее меню
   final bottomNavTap = Action<int>();
 
+  /// переход на страницу home
+  final enterPage = Action<void>();
+
+  /// послать логи
+  final sendLogs = Action<void>();
+
+  /// Количество неотправленных отчетов
+  final StreamedState<int> unsentFilesCount = StreamedState<int>(0);
+
   @override
-  void onLoad() {
+  Future<void> onLoad() async {
     super.onLoad();
     // Следующие запуски будут начинаться с HomeScreen.
     // см. app.dart
     model.perform(SetFirstRun(false));
-
-    // Отправляем старые логи
-    model.perform(SendLogs());
   }
 
   @override
@@ -38,14 +44,13 @@ class HomeWm extends WidgetModel {
     super.onBind();
     subscribe(start.stream, _onStart);
     subscribe(bottomNavTap.stream, _onBottomNavTap);
+    subscribe(enterPage.stream, _onEnterPage);
+    subscribe(sendLogs.stream, _onSendLogs);
   }
 
   /// Нажали на кнопку старт
   Future<void> _onStart(_) async {
-    // по возвращении пробуем отправить логи
-    navigator.pushNamed(PlayRoute.routeName).then(
-          (value) => model.perform(SendLogs()),
-        );
+    navigator.pushNamed(PlayRoute.routeName);
   }
 
   /// Нажали на кнопку навигации внизу
@@ -55,5 +60,26 @@ class HomeWm extends WidgetModel {
     } else if (index == 1) {
       navigator.pushNamed(RegistrationRoute.routeName);
     }
+  }
+
+  /// При переходе на страницу home
+  /// пробуем отправить логи
+  void _onEnterPage(_) => _sendLogs();
+
+  /// Нажали на кнопку отправить логи
+  void _onSendLogs(_) => _sendLogs();
+
+  /// Посылаем логи и обновляем интерфейс
+  Future<void> _sendLogs() async {
+    try {
+      await model.perform(SendLogs());
+    } catch (e) {}
+    _updateUnsentCount();
+  }
+
+  /// Обновление счетчика неотправленных файлов
+  Future<void> _updateUnsentCount() async {
+    final files = await model.perform(GetUnsentLogs());
+    unsentFilesCount.accept(files.length);
   }
 }

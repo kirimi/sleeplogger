@@ -34,6 +34,9 @@ Future<void> main() async {
     runApp(
       MultiProvider(
         providers: [
+          Provider<RouteObserver>(
+            create: (_) => RouteObserver<PageRoute>(),
+          ),
           Provider<SettingsRepository>(
             create: (_) => settingsRepository,
           ),

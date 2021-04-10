@@ -27,6 +27,9 @@ class App extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
+      navigatorObservers: <NavigatorObserver>[
+        context.read<RouteObserver>(),
+      ],
       initialRoute:
           isFirstRun ? RegistrationRoute.routeName : HomeRoute.routeName,
       onGenerateRoute: (settings) {

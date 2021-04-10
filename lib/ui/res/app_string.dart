@@ -18,6 +18,14 @@ class AppString {
   static const String navBarInstruction = 'Инструкции';
   static const String navBarProfile = 'Профиль';
 
+  static String homeUnsentLogs(int count) {
+    return 'У Вас есть $count неотправленных отчета.';
+  }
+
+  static const String homeCheckInternet =
+      'Проверьте интернет-соединение\nи нажмите на кнопку "отправить"';
+  static const String homeSendBtn = 'Отправить';
+
   static const String instructionsMarkdown = '''
 1. Цель данного эксперимента – исследовать процесс засыпания под влиянием различных звуковых стимулов. Опыт рекомендуется проводить либо примерно в 16 часов, либо примерно в 23 часа.
 2. Наденьте (вставьте) стереонаушники.

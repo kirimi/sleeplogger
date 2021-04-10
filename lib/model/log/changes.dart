@@ -18,3 +18,6 @@ class SaveLogs extends FutureChange<void> {}
 
 /// Отправить логи на сервера
 class SendLogs extends FutureChange<void> {}
+
+/// Получить список путей неотправленных логов
+class GetUnsentLogs extends FutureChange<List<String>> {}
