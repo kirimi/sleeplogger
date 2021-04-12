@@ -14,12 +14,12 @@ class StorageRepositoryLocal implements StorageRepository {
     return contents;
   }
 
-  /// Созраняет файл с именем [filename] и содержимом [data]
+  /// Сохраняет файл с именем [filename] и содержимом [data]
   @override
   Future<String> save(String filename, String data) async {
-    final rootDir = await getApplicationDocumentsDirectory();
-    final file = await File('${rootDir.path}/logs/$filename.log')
-        .create(recursive: true);
+    final dir = await _getDirectory();
+    final file =
+        await File('${dir.path}/$filename.log').create(recursive: true);
     await file.writeAsString(data);
     return file.path;
   }
@@ -27,9 +27,7 @@ class StorageRepositoryLocal implements StorageRepository {
   /// Возвращает список файлов с полными путями
   @override
   Future<List<String>> list() async {
-    final rootDir = await getApplicationDocumentsDirectory();
-    final path = '${rootDir.path}/logs/';
-    final dir = Directory(path);
+    final dir = await _getDirectory();
     final files = <String>[];
 
     final completer = Completer<List<String>>();
@@ -58,5 +56,18 @@ class StorageRepositoryLocal implements StorageRepository {
     } catch (e) {
       // Error in getting access to the file.
     }
+  }
+
+  /// Возвращает директорию для сохранения логов
+  ///
+  /// создает директорию, если ее нет
+  Future<Directory> _getDirectory() async {
+    final rootDir = await getApplicationDocumentsDirectory();
+    final path = '${rootDir.path}/logs/';
+    final dir = Directory(path);
+    if (!(await dir.exists())) {
+      await dir.create(recursive: true);
+    }
+    return dir;
   }
 }
