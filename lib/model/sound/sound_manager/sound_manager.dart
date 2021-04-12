@@ -34,6 +34,7 @@ class SoundManager {
     _mainPlayer.setAsset(sound.asset);
     _mainPlayer.setLoopMode(LoopMode.all);
     await _mainPlayer.setVolume(1);
+    await _mainPlayer.seek(const Duration(milliseconds: 100));
     _mainPlayer.play();
 
     _signalPlayer.setAsset(signal.asset);
@@ -64,7 +65,7 @@ class SoundManager {
       return Duration(milliseconds: randomMillis);
     }
 
-    await _signalPlayer.seek(Duration.zero);
+    await _signalPlayer.seek(const Duration(milliseconds: 100));
     logRepository.add(EventType.signal, 'Play signal');
 
     _signalPlayer.play();
